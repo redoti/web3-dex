@@ -89,18 +89,20 @@ function Swap(props) {
 
   // Fetch token prices from Coingecko API
   async function fetchPrices(one, two) {
-    const url = `https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=${one},${two}&vs_currencies=usd`;
-    const res = await axios.get(url);
-
+    const url1 = `https://coins.llama.fi/prices/current/arbitrum:${one}`;
+    const url2 = `https://coins.llama.fi/prices/current/arbitrum:${two}`;
+  
     try {
-      const priceOne = res.data[one]?.usd;
-      const priceTwo = res.data[two]?.usd;
-    
+      const response1 = await axios.get(url1);
+      const response2 = await axios.get(url2);
+      const priceOne = response1.data?.coins?.[`arbitrum:${one}`]?.price;
+      const priceTwo = response2.data?.coins?.[`arbitrum:${two}`]?.price;
+  
       if (priceOne && priceTwo) {
         const ratio = priceOne / priceTwo;
         setPrices({ tokenOne: priceOne, tokenTwo: priceTwo, ratio });
       } else {
-        console.error("Failed to fetch token prices");
+        console.error("Failed to fetch prices");
       }
     } catch (error) {
       console.error(error);
@@ -109,17 +111,17 @@ function Swap(props) {
   
   // Fetch token allowance and initiate swap transaction
   async function fetchDexSwap(){
-    const allowance = await axios.get(`https://api.1inch.io/v5.0/1/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`)
+    const allowance = await axios.get(`https://api.1inch.io/v5.0/42161/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`)
   
     if(allowance.data.allowance === "0"){
-      const approve = await axios.get(`https://api.1inch.io/v5.0/1/approve/transaction?tokenAddress=${tokenOne.address}`)
+      const approve = await axios.get(`https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`)
       setTxDetails(approve.data);
       console.log("not approved")
       return
     }
 
     const tx = await axios.get(
-      `https://api.1inch.io/v5.0/1/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(tokenOne.decimals+tokenOneAmount.length, '0')}&fromAddress=${address}&slippage=${slippage}`
+      `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(tokenOne.decimals+tokenOneAmount.length, '0')}&fromAddress=${address}&slippage=${slippage}`
     )
 
     let decimals = Number(`1E${tokenTwo.decimals}`)
