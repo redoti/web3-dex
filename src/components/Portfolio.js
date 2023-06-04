@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Avatar, Button, Space } from "antd";
 import axios from "axios";
+import { useAccount } from "wagmi";
 import data from "../tokenList.json";
 import "../Portfolio.css";
 
@@ -102,28 +103,33 @@ function Portfolio() {
     }
   }
 
+  const { isConnected } = useAccount();
+
+
   const mainTable = () => (
     <Table
       className="portfolio-table"
       columns={columns}
       dataSource={defaultData}
       pagination={false}
+      
     />
   );
 
-  
     
   return (
     <div>
       <h2 className="tradeBoxHeader">
-        Portfolio Watchlist <div className="Button" disabled={false}>Add</div>
+        Portfolio Watchlist
+        {isConnected && <div className="Button">Add</div>}
       </h2>
-      
-
-      {mainTable()
-      }
+      {!isConnected && <p>Please connect your wallet</p>}
+      {isConnected && mainTable()}
     </div>
   );
+  
+  
+  
 }
 
 export default Portfolio;
