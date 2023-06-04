@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../mixel-logo.png";
 import Arb from "../arbitrum-logo.png";
 import { Link } from "react-router-dom";
+import { Box } from "@chakra-ui/react"
 
 function Header(props) {
 
@@ -13,6 +14,9 @@ function Header(props) {
         <img src={Logo} alt="logo" className="logo" />
         <Link to="/" className="link">
           <div className="headerItem">Swap</div>
+        </Link>
+        <Link to="/Portfolio" className="link">
+          <div className="headerItem">Portfolio</div>
         </Link>
       </div>
       <div className="rightH">

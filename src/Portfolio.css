@@ -1,0 +1,24 @@
+/* portfolio.css */
+
+/* Override table header background color */
+.portfolio-table .ant-table-thead > tr > th {
+    background-color: #0E111B;
+    border: #21273a;
+    color: #fff;
+  }
+  
+  .portfolio-table .ant-table-tbody > tr:hover > td {
+    background-color: #3a4157 !important;
+    border: #243056;
+  }
+
+  /* Override table row selected background color */
+  .portfolio-table .ant-table-tbody > tr.ant-table-row-selected > td {
+    background-color: #e6f7ff;
+  }
+
+  .portfolio-table .ant-table-tbody > tr > td {
+    background-color: #1f2639;
+    color: #fff;
+  }
+  

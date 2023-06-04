@@ -8,9 +8,30 @@
     },
     {
         "ticker": "ARB",
-        "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/11841.png",
+        "img": "https://arbiscan.io/images/svg/brands/arbitrum.svg?v=1.5",
         "name": "Arbitrum",
         "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+        "decimals": 18
+    },
+    {
+        "ticker": "STG",
+        "img": "https://assets.coingecko.com/coins/images/24413/small/STG_LOGO.png?1647654518",
+        "name": "Stargate",
+        "address": "0x6694340fc020c5e6b96567843da2df01b2ce1eb6",
+        "decimals": 18
+    },
+    {
+        "ticker": "GRAIL",
+        "img": "https://app.camelot.exchange/images/tokens/grail.svg",
+        "name": "Camelot",
+        "address": "0x3d9907F9a368ad0a51Be60f7Da3b97cf940982D8",
+        "decimals": 18
+    },
+    {
+        "ticker": "SUSHI",
+        "img": "https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1606986688",
+        "name": "Sushiswap",
+        "address": "0xd4d42f0b6def4ce0383636770ef773390d85c61a",
         "decimals": 18
     }
     
