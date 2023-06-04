@@ -1,38 +1,66 @@
 [
     {
-        "ticker": "USDT",
-        "img": "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png",
-        "name": "Tether USD",
-        "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
-        "decimals": 6
+      "ticker": "USDT",
+      "img": "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png",
+      "name": "Tether USD",
+      "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      "decimals": 6
     },
     {
-        "ticker": "ARB",
-        "img": "https://arbiscan.io/images/svg/brands/arbitrum.svg?v=1.5",
-        "name": "Arbitrum",
-        "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
-        "decimals": 18
+      "ticker": "ARB",
+      "img": "https://arbiscan.io/images/svg/brands/arbitrum.svg?v=1.5",
+      "name": "Arbitrum",
+      "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+      "decimals": 18
     },
     {
-        "ticker": "STG",
-        "img": "https://assets.coingecko.com/coins/images/24413/small/STG_LOGO.png?1647654518",
-        "name": "Stargate",
-        "address": "0x6694340fc020c5e6b96567843da2df01b2ce1eb6",
-        "decimals": 18
+      "ticker": "STG",
+      "img": "https://assets.coingecko.com/coins/images/24413/small/STG_LOGO.png?1647654518",
+      "name": "Stargate",
+      "address": "0x6694340fc020c5e6b96567843da2df01b2ce1eb6",
+      "decimals": 18
     },
     {
-        "ticker": "GRAIL",
-        "img": "https://app.camelot.exchange/images/tokens/grail.svg",
-        "name": "Camelot",
-        "address": "0x3d9907F9a368ad0a51Be60f7Da3b97cf940982D8",
-        "decimals": 18
+      "ticker": "GRAIL",
+      "img": "https://app.camelot.exchange/images/tokens/grail.svg",
+      "name": "Camelot",
+      "address": "0x3d9907F9a368ad0a51Be60f7Da3b97cf940982D8",
+      "decimals": 18
     },
     {
-        "ticker": "SUSHI",
-        "img": "https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1606986688",
-        "name": "Sushiswap",
-        "address": "0xd4d42f0b6def4ce0383636770ef773390d85c61a",
+      "ticker": "SUSHI",
+      "img": "https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1606986688",
+      "name": "Sushiswap",
+      "address": "0xd4d42f0b6def4ce0383636770ef773390d85c61a",
+      "decimals": 18
+    },
+    {
+      "ticker": "ETH",
+      "img": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+      "name": "Ethereum",
+      "address": "0x0000000000000000000000000000000000000000",
+      "decimals": 18
+    },
+    {
+      "ticker": "LINK",
+      "img": "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700",
+      "name": "Chainlink",
+      "address": "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
+      "decimals": 18
+    },
+    {
+        "ticker": "UNI",
+        "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png",
+        "name": "Uniswap",
+        "address": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
         "decimals": 18
-    }
-    
-]
+      },
+      {
+        "ticker": "CRV",
+        "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/6538.png",
+        "name": "Curve",
+        "address": "0x11cDb42B0EB46D95f990BeDD4695A6e3fA034978",
+        "decimals": 18
+      }
+  ]
+  

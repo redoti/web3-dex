@@ -209,10 +209,14 @@ function Portfolio() {
   const mainTable = () => (
     <>
       <Table
-        className="portfolio-table"
+        className="portfolio-table-container && portfolio-table"
         columns={columns}
         dataSource={tableData}
         pagination={false}
+        
+        
+        
+        
       />
       <Modal
         visible={modalVisible}
@@ -240,7 +244,7 @@ function Portfolio() {
   );
 
   return (
-    <div>
+    <div className="portfolio-container">
       <h2 className="tradeBoxHeader">
         Portfolio Watchlist
         {isConnected && (

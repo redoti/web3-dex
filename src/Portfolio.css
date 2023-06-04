@@ -1,5 +1,22 @@
 /* portfolio.css */
 
+.portfolio-table-container {
+  max-height: 400px; /* Adjust the maximum height as per your requirement */
+    overflow: auto;
+    border-radius: 10px;
+}
+.portfolio-table-container::-webkit-scrollbar {
+  width: 0px;
+}
+
+.portfolio-table-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.portfolio-table-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 /* Override table header background color */
 .portfolio-table .ant-table-thead > tr > th {
     background-color: #0E111B;
@@ -10,6 +27,7 @@
   .portfolio-table .ant-table-tbody > tr:hover > td {
     background-color: #3a4157 !important;
     border: #243056;
+    
   }
 
   /* Override table row selected background color */
@@ -20,5 +38,6 @@
   .portfolio-table .ant-table-tbody > tr > td {
     background-color: #1f2639;
     color: #fff;
+    
   }
   
