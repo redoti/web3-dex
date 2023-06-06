@@ -231,7 +231,15 @@ function Swap(props) {
             onChange={changeAmount}
             disabled={!prices}
           />
-          <Input placeholder="0" value={tokenTwoAmount} disabled={true} />
+          <div className="tradeBoxMiniPrice">
+            ~{prices && prices.tokenOne ? `$${prices.tokenOne}` : "Fetching..."}
+          </div>
+
+          
+          <Input 
+          placeholder="0" 
+          value={tokenTwoAmount} 
+          disabled={true}/>
           <div className="switchButton" onClick={switchTokens}>
             <ArrowDownOutlined className="switchArrow" />
           </div>

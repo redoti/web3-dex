@@ -1,66 +1,338 @@
 [
-    {
-      "ticker": "USDT",
-      "img": "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png",
-      "name": "Tether USD",
-      "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
-      "decimals": 6
-    },
-    {
-      "ticker": "ARB",
-      "img": "https://arbiscan.io/images/svg/brands/arbitrum.svg?v=1.5",
-      "name": "Arbitrum",
-      "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+  {
+    "ticker": "ARB",
+    "img": "https://arbiscan.io/images/svg/brands/arbitrum.svg?v=1.5",
+    "name": "Arbitrum",
+    "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+    "decimals": 18
+  },
+  {
+    "ticker": "USDT",
+    "img": "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png",
+    "name": "Tether USD",
+    "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+    "decimals": 6
+  },
+  {
+    "ticker": "STG",
+    "img": "https://assets.coingecko.com/coins/images/24413/small/STG_LOGO.png?1647654518",
+    "name": "Stargate",
+    "address": "0x6694340fc020c5e6b96567843da2df01b2ce1eb6",
+    "decimals": 18
+  },
+  {
+    "ticker": "GRAIL",
+    "img": "https://app.camelot.exchange/images/tokens/grail.svg",
+    "name": "Camelot",
+    "address": "0x3d9907F9a368ad0a51Be60f7Da3b97cf940982D8",
+    "decimals": 18
+  },
+  {
+    "ticker": "SUSHI",
+    "img": "https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1606986688",
+    "name": "Sushiswap",
+    "address": "0xd4d42f0b6def4ce0383636770ef773390d85c61a",
+    "decimals": 18
+  },
+  {
+    "ticker": "ETH",
+    "img": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+    "name": "Ethereum",
+    "address": "0x0000000000000000000000000000000000000000",
+    "decimals": 18
+  },
+  {
+    "ticker": "LINK",
+    "img": "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700",
+    "name": "Chainlink",
+    "address": "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
+    "decimals": 18
+  },
+  {
+      "ticker": "UNI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png",
+      "name": "Uniswap",
+      "address": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
       "decimals": 18
     },
     {
-      "ticker": "STG",
-      "img": "https://assets.coingecko.com/coins/images/24413/small/STG_LOGO.png?1647654518",
-      "name": "Stargate",
-      "address": "0x6694340fc020c5e6b96567843da2df01b2ce1eb6",
+      "ticker": "CRV",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/6538.png",
+      "name": "Curve",
+      "address": "0x11cDb42B0EB46D95f990BeDD4695A6e3fA034978",
       "decimals": 18
     },
     {
-      "ticker": "GRAIL",
-      "img": "https://app.camelot.exchange/images/tokens/grail.svg",
-      "name": "Camelot",
-      "address": "0x3d9907F9a368ad0a51Be60f7Da3b97cf940982D8",
+      "ticker": "GRT",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/6719.png",
+      "name": "The Graph",
+      "address": "0x23a941036ae778ac51ab04cea08ed6e2fe103614",
       "decimals": 18
     },
     {
-      "ticker": "SUSHI",
-      "img": "https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1606986688",
-      "name": "Sushiswap",
-      "address": "0xd4d42f0b6def4ce0383636770ef773390d85c61a",
+      "ticker": "TUSD",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/2563.png",
+      "name": "TrueUSD",
+      "address": "0x4D15a3A2286D883AF0AA1B3f21367843FAc63E07",
       "decimals": 18
     },
     {
-      "ticker": "ETH",
-      "img": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
-      "name": "Ethereum",
-      "address": "0x0000000000000000000000000000000000000000",
+      "ticker": "JOE",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/11396.png",
+      "name": "JOE",
+      "address": "0x371c7ec6D8039ff7933a2AA28EB827Ffe1F52f07",
       "decimals": 18
     },
     {
-      "ticker": "LINK",
-      "img": "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700",
-      "name": "Chainlink",
-      "address": "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
+      "ticker": "FXS",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/6953.png",
+      "name": "Frax Share",
+      "address": "0x9d2f299715d94d8a7e6f5eaa8e654e8c74a988a7",
       "decimals": 18
     },
     {
-        "ticker": "UNI",
-        "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png",
-        "name": "Uniswap",
-        "address": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
-        "decimals": 18
-      },
-      {
-        "ticker": "CRV",
-        "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/6538.png",
-        "name": "Curve",
-        "address": "0x11cDb42B0EB46D95f990BeDD4695A6e3fA034978",
-        "decimals": 18
-      }
-  ]
-  
+      "ticker": "WOO",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/7501.png",
+      "name": "WOO Network",
+      "address": "0xcafcd85d8ca7ad1e1c6f82f651fa15e33aefd07b",
+      "decimals":  18
+    },
+    {
+      "ticker": "GNO",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/1659.png",
+      "name": "Gnosis",
+      "address": "0xa0b862f60edef4452f25b4160f177db44deb6cf1",
+      "decimals":   18
+    },
+    {
+      "ticker": "BAL",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/5728.png",
+      "name": "Balancer",
+      "address": "0x040d1edc9569d4bab2d15287dc5a4f10f56a56b8",
+      "decimals":   18
+    },
+    {
+      "ticker": "YFI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/5864.png",
+      "name": "yearn.finance",
+      "address": "0x82e3A8F066a6989666b031d916c43672085b1582",
+      "decimals":   18
+    },
+    {
+      "ticker": "CTSI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/5444.png",
+      "name": "Cartesi",
+      "address": "0x319f865b287fCC10b30d8cE6144e8b6D1b476999",
+      "decimals":   18
+    },
+    {
+      "ticker": "FRAX",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/6952.png",
+      "name": "Frax",
+      "address": "0x17FC002b466eEc40DaE837Fc4bE5c67993ddBd6F",
+      "decimals":   18
+    },
+    {
+      "ticker": "GNS",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/13663.png",
+      "name": "Gains Network",
+      "address": "0x18c11FD286C5EC11c3b683Caa813B77f5163A122",
+      "decimals":   18
+    },
+    {
+      "ticker": "SYN",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/12147.png",
+      "name": "Synapse",
+      "address": "0x080f6aed32fc474dd5717105dba5ea57268f46eb",
+      "decimals":   18
+    },
+    {
+      "ticker": "MULTI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/17050.png",
+      "name": "Multichain",
+      "address": "0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3",
+      "decimals":   18
+    },
+    {
+      "ticker": "SPELL",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/11289.png",
+      "name": "Spell Token   ",
+      "address": "0x3e6648c5a70a150a88bce65f4ad4d506fe15d2af",
+      "decimals":   18
+    },
+    {
+      "ticker": "DODO",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/7224.png",
+      "name": "DODO",
+      "address": "0x69Eb4FA4a2fbd498C257C57Ea8b7655a2559A581",
+      "decimals":   18
+    },
+    {
+      "ticker": "MCB",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/5956.png",
+      "name": "MUX Protocol",
+      "address": "0x4e352cf164e64adcbad318c3a1e222e9eba4ce42",
+      "decimals":   18
+    },
+    {
+      "ticker": "WETH",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png",
+      "name": "WETH",
+      "address": "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+      "decimals":   18
+    },
+    {
+      "ticker": "AIBB",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/24742.png",
+      "name": "BullBear AI   ",
+      "address": "0xb9af4762c039d63e30039f1712dfab77026408c7",
+      "decimals":   18
+    },
+    {
+      "ticker": "axlUSDC",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/21420.png",
+      "name": "Axelar Wrapped USDC",
+      "address": "0xEB466342C4d449BC9f53A865D5Cb90586f405215",
+      "decimals":   18
+    },
+    {
+      "ticker": "SHARBI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23523.png",
+      "name": "SHARBI",
+      "address": "0xaa54e84A3e6e5A80288d2C2f8e36eA5cA3A3Ca30",
+      "decimals":   18
+    },
+    {
+      "ticker": "MIMATIC",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/10238.png",
+      "name": "MAI",
+      "address": "0x3F56e0c36d275367b8C502090EDF38289b3dEa0d",
+      "decimals":   18
+    },
+    {
+      "ticker": "VELA",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23248.png",
+      "name": "Vela Exchange",
+      "address": "0x088cd8f5ef3652623c22d48b1605dcfe860cd704",
+      "decimals":   18
+    },
+    {
+      "ticker": "AA",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/25354.png",
+      "name": "A3S Protocol",
+      "address": "0xb0ecc6ac0073c063dcfc026ccdc9039cae2998e1",
+      "decimals":   18
+    },
+    {
+      "ticker": "pogai",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/24859.png",
+      "name": "POGAI",
+      "address": "0x6fD58f5a2F3468e35fEb098b5F59F04157002407",
+      "decimals":   18
+    },
+    {
+      "ticker": "UMAMI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/15480.png",
+      "name": "Umami Finance",
+      "address": "0x1622bf67e6e5747b81866fe0b85178a93c7f86e3",
+      "decimals":   18
+    },
+     {
+      "ticker": "PLS",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/19964.png",
+      "name": "PlutusDAO",
+      "address": "0x51318b7d00db7acc4026c88c3952b66278b6a67f",
+      "decimals":   18
+    },
+    {
+      "ticker": "GMD",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/22525.png",
+      "name": "GMD Protocol",
+      "address": "0x4945970efeec98d393b4b979b9be265a3ae28a8b",
+      "decimals":   18
+    },
+    {
+      "ticker": "USH",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23837.png",
+      "name": "unshETHing_Token",
+      "address": "0x51a80238b5738725128d3a3e06ab41c1d4c05c74",
+      "decimals":   18
+    },
+    {
+      "ticker": "RDPX",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/12057.png",
+      "name": "Dopex Rebate Token",
+      "address": "0x32eb7902d4134bf98a28b963d26de779af92a212",
+      "decimals":   18
+    },
+    {
+      "ticker": "UNIDX",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/8232.png",
+      "name": "UniDex",
+      "address": "0x5429706887FCb58a595677B73E9B0441C25d993D",
+      "decimals":   18
+    },
+    {
+      "ticker": "TROVE",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23580.png",
+      "name": "Arbitrove Protocol",
+      "address": "0x982239d38af50b0168da33346d85fb12929c4c07",
+      "decimals":   18
+    },
+    {
+      "ticker": "CNFI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/8227.png",
+      "name": "Connect Financial",
+      "address": "0x6f5401c53e2769c858665621d22ddbf53d8d27c5",
+      "decimals":   18
+    },
+    {
+      "ticker": "BFR",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/12440.png",
+      "name": "Buffer Finance",
+      "address": "0x1a5b0aaf478bf1fda7b934c76e7692d722982a6d",
+      "decimals":   18
+    },
+    {
+      "ticker": "ARBS",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/20661.png",
+      "name": "Arbswap",
+      "address": "0xf50874f8246776CA4B89eEF471E718F70f38458F",
+      "decimals":   18
+    },
+    {
+      "ticker": "PSI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23412.png",
+      "name": "TridentDAO",
+      "address": "0x602eb0d99a5e3e76d1510372c4d2020e12eaea8a",
+      "decimals":   18
+    },
+    {
+      "ticker": "WINR",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23681.png",
+      "name": "WINR Protocol",
+      "address": "0xd77b108d4f6cefaa0cae9506a934e825becca46e",
+      "decimals":   18
+    },
+    {
+      "ticker": "RAB",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23929.png",
+      "name": "Rabbit",
+      "address": "0x24ef78c7092d255ed14a0281ac1800c359af3afe",
+      "decimals":   18
+    },
+    {
+      "ticker": "ARC",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23486.png",
+      "name": "Arcadeum",
+      "address": "0x7F465507f058e17Ad21623927a120ac05CA32741",
+      "decimals":   18
+    },
+    {
+      "ticker": "HAMI",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23286.png",
+      "name": "Hamachi Finance",
+      "address": "0x02150e97271fdc0d6e3a16d9094a0948266f07dd",
+      "decimals":   18
+    }
+]
