@@ -27,7 +27,15 @@ function Swap(props) {
     to:null,
     data: null,
     value: null,
-  }); 
+  });
+  const { Alchemy, Network } = require("alchemy-sdk");
+  
+  const config = {
+    apiKey: "PuCUG-mzhjx1W_n6WB0VRDNd_Rr0-TfC",
+    network: Network.ARB_MAINNET,
+  };
+  const alchemy = new Alchemy(config);
+
 
   // Custom hooks for sending and waiting for transactions
   const {data, sendTransaction} = useSendTransaction({
@@ -76,10 +84,12 @@ function Swap(props) {
   function modifyToken(i){
     setPrices(null);
     setTokenOneAmount(null);
-    setTokenTwoAmount(null);
+    setTokenTwoAmount(null); 
     if (changeToken === 1) {
       setTokenOne(tokenList[i]);
       fetchPrices(tokenList[i].address, tokenTwo.address)
+
+      
     } else {
       setTokenTwo(tokenList[i]);
       fetchPrices(tokenOne.address, tokenList[i].address)
@@ -153,6 +163,48 @@ function Swap(props) {
     }    
   },[isLoading])
 
+
+  // Fetch Balances
+  const [balances, setBalances] = useState([]);
+
+  useEffect(() => {
+    const fetchTokenBalances = async () => {
+      // Wallet address
+      const connectedAddress = address;
+      const tokenContractAddresses = [tokenOne.address, tokenTwo.address];
+  
+      try {
+        // Get token balances
+        const balances = await alchemy.core.getTokenBalances(
+          connectedAddress,
+          tokenContractAddresses
+        );
+  
+        console.log(`The balances of ${connectedAddress} are:`);
+        balances.tokenBalances.forEach((token) => {
+          console.log(`Contract Address: ${token.contractAddress}`);
+          console.log(`Token Balance: ${token.tokenBalance}`);
+  
+          // Calculate rounded balance
+            const decimalBalance =
+            parseInt(token.tokenBalance, 16) /
+            Math.pow(10, tokenOne.decimals); // Convert hexadecimal to decimal
+            const roundedBalance = decimalBalance.toFixed(2); // Round to 2 decimal places
+            token.roundedBalance = roundedBalance; // Add roundedBalance property to token object
+        });
+  
+        // Update state with balances
+        setBalances(balances.tokenBalances);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchTokenBalances();
+  }, [tokenOne, tokenTwo]);
+  
+
+  
   // Display success or failure message when transaction completes
   useEffect(()=>{
     messageApi.destroy();
@@ -232,10 +284,21 @@ function Swap(props) {
             disabled={!prices}
           />
           <div className="tradeBoxMiniPrice">
-            ~{prices && prices.tokenOne ? `$${prices.tokenOne}` : "Fetching..."}
+            ~{prices && prices.tokenOne ? `$${prices.tokenOne}` : ""}
           </div>
-
-          
+          <div className="tradeBoxMiniBalance">
+            {/* Display tokenOne balance */}
+            {balances.map((token) => {
+              if (token.contractAddress === tokenOne.address) {
+                return (
+                  <div>
+                    <div>Balance: {token.roundedBalance}</div>
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </div>
           <Input 
           placeholder="0" 
           value={tokenTwoAmount} 
@@ -255,6 +318,8 @@ function Swap(props) {
           </div>
         </div>
         <div className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={fetchDexSwap}>Swap</div>
+
+        
       </div>
     </>
   );
