@@ -289,6 +289,7 @@ function Swap(props) {
           <div className="tradeBoxMiniPrice">
             ~{prices && prices.tokenOne ? `$${prices.tokenOne}` : ""}
           </div>
+          {isConnected && (
           <div className="tradeBoxMiniBalance">
             {/* Display tokenOne balance */}
             {balances.map((token) => {
@@ -302,12 +303,11 @@ function Swap(props) {
               }
               return null;
             })}
-            {isConnected && (
+            
             <div className="maxButton" 
             disabled={ !isConnected} 
             onClick={setMaxAmount}>MAX</div>
-            )}
-          </div>
+          </div>)}
           
           
           <Input 
