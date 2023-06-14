@@ -58,11 +58,19 @@ function Swap(props) {
 
   function changeAmount(e) {
     setTokenOneAmount(e.target.value);
-    if(e.target.value && prices){
-      setTokenTwoAmount((e.target.value * prices.ratio).toFixed(2))
-    }else{
+    if (e.target.value && prices) {
+      setTokenTwoAmount((e.target.value * prices.ratio).toFixed(2));
+    } else {
       setTokenTwoAmount(null);
     }
+  }
+  
+  function setMaxAmount() {
+    const maxAmount = balances.find(
+      (token) => token.contractAddress === tokenOne.address
+    ).roundedBalance;
+    setTokenOneAmount(maxAmount);
+    setTokenTwoAmount((maxAmount * prices.ratio).toFixed(2));
   }
 
   function switchTokens() {
@@ -167,39 +175,34 @@ function Swap(props) {
   // Fetch Balances
   const [balances, setBalances] = useState([]);
 
-  useEffect(() => {
-    const fetchTokenBalances = async () => {
-      // Wallet address
-      const connectedAddress = address;
-      const tokenContractAddresses = [tokenOne.address, tokenTwo.address];
+  const fetchTokenBalances = async () => {
+    // Wallet address
+    const connectedAddress = address;
+    const tokenContractAddresses = [tokenOne.address, tokenTwo.address];
   
-      try {
-        // Get token balances
-        const balances = await alchemy.core.getTokenBalances(
-          connectedAddress,
-          tokenContractAddresses
-        );
+    try {
+      // Get token balances
+      const balances = await alchemy.core.getTokenBalances(
+        connectedAddress,
+        tokenContractAddresses
+      );
   
-        console.log(`The balances of ${connectedAddress} are:`);
         balances.tokenBalances.forEach((token) => {
-          console.log(`Contract Address: ${token.contractAddress}`);
-          console.log(`Token Balance: ${token.tokenBalance}`);
+        const decimalBalance =
+          parseInt(token.tokenBalance, 16) /
+          Math.pow(10, tokenOne.decimals); // Convert hexadecimal to decimal
+        const roundedBalance = decimalBalance.toFixed(2); // Round to 2 decimal places
+        token.roundedBalance = roundedBalance; // Add roundedBalance property to token object
+      });
   
-          // Calculate rounded balance
-            const decimalBalance =
-            parseInt(token.tokenBalance, 16) /
-            Math.pow(10, tokenOne.decimals); // Convert hexadecimal to decimal
-            const roundedBalance = decimalBalance.toFixed(2); // Round to 2 decimal places
-            token.roundedBalance = roundedBalance; // Add roundedBalance property to token object
-        });
+      // Update state with balances
+      setBalances(balances.tokenBalances);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
-        // Update state with balances
-        setBalances(balances.tokenBalances);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
+  useEffect(() => {
     fetchTokenBalances();
   }, [tokenOne, tokenTwo]);
   
@@ -293,12 +296,20 @@ function Swap(props) {
                 return (
                   <div>
                     <div>Balance: {token.roundedBalance}</div>
+                    
                   </div>
                 );
               }
               return null;
             })}
+            {isConnected && (
+            <div className="maxButton" 
+            disabled={ !isConnected} 
+            onClick={setMaxAmount}>MAX</div>
+            )}
           </div>
+          
+          
           <Input 
           placeholder="0" 
           value={tokenTwoAmount} 
