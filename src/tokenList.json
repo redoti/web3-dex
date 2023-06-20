@@ -182,20 +182,6 @@
       "decimals":   18
     },
     {
-      "ticker": "AIBB",
-      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/24742.png",
-      "name": "BullBear AI   ",
-      "address": "0xb9af4762c039d63e30039f1712dfab77026408c7",
-      "decimals":   18
-    },
-    {
-      "ticker": "axlUSDC",
-      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/21420.png",
-      "name": "Axelar Wrapped USDC",
-      "address": "0xEB466342C4d449BC9f53A865D5Cb90586f405215",
-      "decimals":   18
-    },
-    {
       "ticker": "SHARBI",
       "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23523.png",
       "name": "SHARBI",
@@ -214,13 +200,6 @@
       "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23248.png",
       "name": "Vela Exchange",
       "address": "0x088cd8f5ef3652623c22d48b1605dcfe860cd704",
-      "decimals":   18
-    },
-    {
-      "ticker": "AA",
-      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/25354.png",
-      "name": "A3S Protocol",
-      "address": "0xb0ecc6ac0073c063dcfc026ccdc9039cae2998e1",
       "decimals":   18
     },
     {
@@ -266,13 +245,6 @@
       "decimals":   18
     },
     {
-      "ticker": "UNIDX",
-      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/8232.png",
-      "name": "UniDex",
-      "address": "0x5429706887FCb58a595677B73E9B0441C25d993D",
-      "decimals":   18
-    },
-    {
       "ticker": "TROVE",
       "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23580.png",
       "name": "Arbitrove Protocol",
@@ -312,13 +284,6 @@
       "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23681.png",
       "name": "WINR Protocol",
       "address": "0xd77b108d4f6cefaa0cae9506a934e825becca46e",
-      "decimals":   18
-    },
-    {
-      "ticker": "RAB",
-      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/23929.png",
-      "name": "Rabbit",
-      "address": "0x24ef78c7092d255ed14a0281ac1800c359af3afe",
       "decimals":   18
     },
     {
