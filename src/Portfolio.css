@@ -1,9 +1,10 @@
 /* portfolio.css */
 
 .portfolio-table-container {
-  max-height: 400px; /* Adjust the maximum height as per your requirement */
+  max-height: 500px; /* Adjust the maximum height as per your requirement */
     overflow: auto;
     border-radius: 10px;
+    
 }
 .portfolio-table-container::-webkit-scrollbar {
   width: 0px;

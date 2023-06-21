@@ -29,7 +29,7 @@ function Portfolio() {
           
           // fetch Metadatas
           const metadata = await alchemy.core.getTokenMetadata(token.contractAddress);
-          const tokenName = metadata.name + "(" + metadata.symbol + ")";
+          const tokenName = metadata.name + " (" + metadata.symbol + ")";
 
           // calculate balance from hex to decimal
           const tokenBalance = balance / Math.pow(10, metadata.decimals);
