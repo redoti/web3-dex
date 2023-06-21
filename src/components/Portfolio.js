@@ -2,84 +2,65 @@ import React, { useState, useEffect } from "react";
 import { Table, Avatar } from "antd";
 import axios from "axios";
 import { useAccount } from "wagmi";
-import tokenList from "../tokenList.json";
 import "../Portfolio.css";
 import { Alchemy, Network } from "alchemy-sdk";
 
+
 function Portfolio() {
   const { isConnected, address } = useAccount();
-  const [tokenPrices, setTokenPrices] = useState({});
   const [balances, setBalances] = useState([]);
-
   const config = {
     apiKey: "PuCUG-mzhjx1W_n6WB0VRDNd_Rr0-TfC",
     network: Network.ARB_MAINNET,
   };
   const alchemy = new Alchemy(config);
 
-  useEffect(() => {
-    const fetchTokenPrices = async () => {
-      try {
-        const tokenPriceData = {};
+  const fetchTokenData = async () => {
+    try {
+      const connectedAddress = address;
+      const balances = await alchemy.core.getTokenBalances(connectedAddress);
+      const nonZeroBalances = balances.tokenBalances.filter((token) => {
+        return token.tokenBalance !== "0";
+      });
+  
+      const tokenData = await Promise.all(
+        nonZeroBalances.map(async (token, index) => {
+          let balance = token.tokenBalance;
+          
+          // fetch Metadatas
+          const metadata = await alchemy.core.getTokenMetadata(token.contractAddress);
+          const tokenName = metadata.name + "(" + metadata.symbol + ")";
 
-        await Promise.all(
-          tokenList.map(async (token) => {
-            const response = await axios.get(`https://coins.llama.fi/prices/current/arbitrum:${token.address}`);
-            const tokenPrice = response?.data?.coins?.[`arbitrum:${token.address}`]?.price;
-
-            if (tokenPrice !== undefined) {
-              tokenPriceData[`arbitrum:${token.address}`] = tokenPrice;
-            } else {
-              console.error(`Invalid response for token address: arbitrum:${token.address}`);
-            }
-          })
-        );
-
-        setTokenPrices(tokenPriceData);
-      } catch (error) {
-        console.error('Error fetching token prices:', error);
-      }
-    };
-
-    fetchTokenPrices();
-  }, []);
-
-  useEffect(() => {
-    const fetchTokenBalances = async () => {
-      try {
-        const tokenContractAddresses = tokenList.map((token) => token.address);
-        const data = await alchemy.core.getTokenBalances(address, tokenContractAddresses);
-
-        const tokenBalances = await Promise.all(
-          tokenContractAddresses.map(async (tokenAddress, index) => {
-            const metadata = await alchemy.core.getTokenMetadata(tokenAddress);
-            const tokenName = metadata.name + "(" + metadata.symbol + ")";
-            const tokenBalance = data["tokenBalances"][index]["tokenBalance"] / Math.pow(10, metadata.decimals);
-            const roundedBalance = tokenBalance.toFixed(3);
-
-
-            return {
-              name: tokenName,
-              balance: roundedBalance,
-              decimals: metadata.decimals,
-              address: tokenAddress,
-              img: metadata.logo,
-              ticker: metadata.symbol,
-            };
-          })
-        );
-
-        setBalances(tokenBalances);
-      } catch (error) {
-        console.error("Error fetching token balances:", error);
-      }
-    };
-
-    if (isConnected) {
-      fetchTokenBalances();
+          // calculate balance from hex to decimal
+          const tokenBalance = balance / Math.pow(10, metadata.decimals);
+          const roundedBalance = tokenBalance.toFixed(3);
+          
+          // fetch Prices
+          const response = await axios.get(`https://coins.llama.fi/prices/current/arbitrum:${token.contractAddress}`);
+          const tokenPrice = response?.data?.coins?.[`arbitrum:${token.contractAddress}`]?.price;
+  
+          return {
+            name: tokenName,
+            balance: roundedBalance,
+            decimals: metadata.decimals,
+            address: token.contractAddress,
+            img: metadata.logo,
+            ticker: metadata.symbol,
+            price: tokenPrice,
+          };
+        })
+      );
+  
+      setBalances(tokenData);
+    } catch (error) {
+      console.error("Error fetching token data:", error);
     }
-  }, [isConnected, address]);
-
+  };
+  
+  useEffect(() => {
+    fetchTokenData();
+  }, []);
+  
   const columns = [
     {
       title: "Icon",
@@ -100,9 +81,9 @@ function Portfolio() {
       key: "price",
       width: "100px",
       align: "center",
-      render: (address) => {
-        const tokenPrice = tokenPrices[`arbitrum:${address}`];
-        return tokenPrice ? <span>${tokenPrice}</span> : null;
+      render: (_, token) => {
+        const tokenPrice = token.price;
+        return tokenPrice ? `$${tokenPrice}` : 0;
       },
     },
     {
@@ -119,23 +100,33 @@ function Portfolio() {
       width: "100px",
       align: "center",
       render: (_, token) => {
-        const tokenPrice = tokenPrices[`arbitrum:${token.address}`];
-        const value = tokenPrice ? (tokenPrice * token.balance).toFixed(3) : null;
-        return value ? <span>${value}</span> : null;
-      },
+          const tokenPrice = token.price;
+          const value = tokenPrice ? (tokenPrice * token.balance).toFixed(3) : null;
+          return value ? <span>${value}</span> : 0;
+      }
     },
   ];
 
-  const mainTable = () => (
-    <>
-      <Table
-        className="portfolio-table-container && portfolio-table"
-        columns={columns}
-        dataSource={balances}
-        pagination={false}
-      />
-    </>
-  );
+  const mainTable = () => {
+    // Filter out balances with value less than 0.001 &
+    const filteredBalances = balances.filter((token) => {
+      const tokenPrice = token.price;
+      const tokenImg = token.img
+      const value = tokenPrice ? tokenPrice * token.balance : null;
+      return value && value >= 0.001 && tokenImg !== null;
+    });
+  
+    return (
+      <>
+        <Table
+          className="portfolio-table-container && portfolio-table"
+          columns={columns}
+          dataSource={filteredBalances}
+          pagination={false}
+        />
+      </>
+    );
+  };
 
   return (
     <div className="portfolio-container">
