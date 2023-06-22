@@ -127,26 +127,31 @@ function Swap(props) {
     }
   }
   
-  // Fetch token allowance and initiate swap transaction
-  async function fetchDexSwap(){
-    const allowance = await axios.get(`https://api.1inch.io/v5.0/42161/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`)
+  // Approve Allowance
   
-    if(allowance.data.allowance === "0"){
-      const approve = await axios.get(`https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`)
-      setTxDetails(approve.data);
-      console.log("not approved")
-      return
-    }
-
+  async function approveAllowance() {
+    const approve = await axios.get(
+      `https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`
+    );
+    setTxDetails(approve.data);
+    console.log("not approved");
+  }
+  
+  // Do Swap
+  async function Swap() {
     const tx = await axios.get(
-      `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(tokenOne.decimals+tokenOneAmount.length, '0')}&fromAddress=${address}&slippage=${slippage}`
-    )
-
-    let decimals = Number(`1E${tokenTwo.decimals}`)
-    setTokenTwoAmount((Number(tx.data.toTokenAmount)/decimals).toFixed(2));
+      `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(
+        tokenOne.decimals + tokenOneAmount.length,
+        '0'
+      )}&fromAddress=${address}&slippage=${slippage}`
+    );
+  
+    let decimals = Number(`1E${tokenTwo.decimals}`);
+    setTokenTwoAmount((Number(tx.data.toTokenAmount) / decimals).toFixed(2));
     setTxDetails(tx.data.tx);
   }
-
+  
+  
   // Fetch token prices on component mount
   useEffect(()=>{
     fetchPrices(tokenList[0].address, tokenList[1].address)
@@ -328,7 +333,12 @@ function Swap(props) {
             <DownOutlined />
           </div>
         </div>
-        <div className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={fetchDexSwap}>Swap</div>
+        <div className="functionButton" >
+          <div className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={approveAllowance}>Approve</div>
+          <div className="swapButton" disabled={!tokenOneAmount || !isConnected} onClick={Swap}>Swap</div>
+          </div>
+        
+        
 
         
       </div>

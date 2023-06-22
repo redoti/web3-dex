@@ -195,6 +195,21 @@ header {
   margin-left: 5px;
 }
 
+.functionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100%);
+  height: 55px;
+  font-size: 20px;
+  border-radius: 12px;
+  color: #5981F3;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  gap: 10px;
+}
 .swapButton {
   display: flex;
   justify-content: center;
@@ -226,6 +241,7 @@ header {
   cursor: pointer;
   background-color: #3b4874
 }
+
 
 .tokenLogo {
   height: 40px;
