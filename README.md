@@ -8,10 +8,8 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Uploading 0627.mp4…
 
-
-
+https://github.com/redoti/web3-dex/assets/49931988/ba119ab5-7071-4788-aa88-10931032e26b
 
 
 
