@@ -26,13 +26,13 @@ https://gitforwindows.org/
 https://sourceforge.net/projects/git-osx-installer/files/git-2.23.0-intel-universal-mavericks.dmg/download
 ```
 
-##### Linux
+##### Linux Debian/Ubuntu
 It's a good idea to make sure you're running the latest version. Run the following command
 ```javascripts
 sudo apt-get update
 ```
 ```javascripts
-git clone https://github.com/redoti/web3-dex.git
+sudo apt-get install git-all
 ```
 
 ### Download Source Code
