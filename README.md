@@ -95,4 +95,10 @@ On this page you can watch your portfolio on Arbitrum Mainnet. You need to conne
 # How to Swap
 
 If you want to do a transaction, you need to give `approval` for Dapps first
+
 https://github.com/redoti/web3-dex/assets/49931988/ae9f546e-2e4b-4065-a23a-0a449154b874
+
+
+
+
+
