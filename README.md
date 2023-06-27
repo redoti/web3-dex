@@ -1,76 +1,98 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple DApps that containing and using API from [1INCH](https://docs.1inch.io/) - [Defillama](https://defillama.com/docs/api) - [Alchemy](https://docs.alchemy.com/)
 
-## Available Scripts
+# Environment Setup
 
-In the project directory, you can run:
+Install fundamental environments including node, and git
+ 
+### Install nodejs
 
-### `npm start`
+```javascripts
+https://nodejs.org/en/download
+```
 
+### Install git
 
-https://github.com/redoti/web3-dex/assets/49931988/ba119ab5-7071-4788-aa88-10931032e26b
+##### Windows
 
+```javascripts
+https://gitforwindows.org/
+```
 
+##### MAC
 
+```javascripts
+https://sourceforge.net/projects/git-osx-installer/files/git-2.23.0-intel-universal-mavericks.dmg/download
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+##### Linux
+It's a good idea to make sure you're running the latest version. Run the following command
+```javascripts
+sudo apt-get update
+```
+```javascripts
+git clone https://github.com/redoti/web3-dex.git
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Download Source Code
 
-### `npm test`
+Open your terminal and run the following command or just download the `zip file`
+```javascripts
+git clone https://github.com/redoti/web3-dex.git
+```
+### Download Metamask
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![img](https://images.ctfassets.net/9sy2a0egs6zh/7wNAiVbgssyrL7UY3xd4FY/2a15d3f50b85a34e8443c08c49579191/home-hero-dark.png?w=1920&q=80&fm=webp#only-dark)
 
-### `npm run build`
+> Metamask is a crypto wallet & gateway to blockchain apps
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascripts
+https://metamask.io/download/
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Deploy the Source Code 
+Before running anything, you'll need to install the dependencies:
+```javascripts
+npm install
+```
+### Running the interface locally
+Run on `development environment` if you want to deploy the source code directly to the `development server`. Navigate to [http://localhost:3000].
+```javascripts
+npm run start
+```
+### Creating a production build
+Run on `production environment` if you want to deploy the source code directly to the `production server`
+```javascripts
+npm run build
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Guidelines
 
-### `npm run eject`
+### Swap Page
+This is a very simple UI that everyone will be able to interact with the Dapps.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![img](https://cdn.discordapp.com/attachments/994806484942721025/1123115275076763648/image.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+On this page you can do the transaction between the 2 tokens.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Name Interfaces | Explanation                         			   |
+| --------------- | -------------------------------------------------- |
+| Connect         |  `connect` [Metamask](https://metamask.io/) Wallet |
+| Approve         |  Give `approval` for Dapps to spend source token   |
+| Swap            |  `Swap` transaction between the 2 tokens           |
+| Arbitrum        | This indicates that it is an `Arbitrum` Mainnet    |
+| Portfolio	      | Move to `portfolio` page 						   |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#
 
-## Learn More
+### Portfolio Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![img](https://cdn.discordapp.com/attachments/994806484942721025/1123130413024546906/image.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+On this page you can watch your portfolio on Arbitrum Mainnet. You need to connect your `Metamask` Wallet to see the table.
 
-### Code Splitting
+# How to Swap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you want to do a transaction, you need to give `approval` for Dapps first
+https://github.com/redoti/web3-dex/assets/49931988/ae9f546e-2e4b-4065-a23a-0a449154b874
