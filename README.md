@@ -78,7 +78,7 @@ On this page you can do the transaction between the 2 tokens.
 
 | Name Interfaces | Explanation                         			   |
 | --------------- | -------------------------------------------------- |
-| Connect         |  `connect` [Metamask](https://metamask.io/) Wallet |
+| Connect         |  `connect` Metamask Wallet |
 | Approve         |  Give `approval` for Dapps to spend source token   |
 | Swap            |  `Swap` transaction between the 2 tokens           |
 | Arbitrum        | This indicates that it is an `Arbitrum` Mainnet    |
