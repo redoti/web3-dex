@@ -130,27 +130,35 @@ function Swap(props) {
   // Approve Allowance
   
   async function approveAllowance() {
-    const approve = await axios.get(
-      `https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`
-    );
-    setTxDetails(approve.data);
-    console.log("not approved");
-  }
+    try {
+      const approve = await axios.get(
+        `https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`
+      );
+      setTxDetails(approve.data);
+      console.log("Your token allowance is: " + approve.data.value);
+    } catch (error) {
+      console.error("Failed to approve token allowance:", error);
+    }
+  }  
   
   // Do Swap
   async function Swap() {
-    const tx = await axios.get(
-      `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(
-        tokenOne.decimals + tokenOneAmount.length,
-        '0'
-      )}&fromAddress=${address}&slippage=${slippage}`
-    );
+    try {
+      const tx = await axios.get(
+        `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(
+          tokenOne.decimals + tokenOneAmount.length,
+          '0'
+        )}&fromAddress=${address}&slippage=${slippage}`
+      );
   
-    let decimals = Number(`1E${tokenTwo.decimals}`);
-    setTokenTwoAmount((Number(tx.data.toTokenAmount) / decimals).toFixed(2));
-    setTxDetails(tx.data.tx);
+      let decimals = Number(`1E${tokenTwo.decimals}`);
+      setTokenTwoAmount((Number(tx.data.toTokenAmount) / decimals).toFixed(2));
+      setTxDetails(tx.data.tx);
+    } catch (error) {
+      console.log("You have to approve token allowance")
+      await approveAllowance();
+    }
   }
-  
   
   // Fetch token prices on component mount
   useEffect(()=>{
