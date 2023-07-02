@@ -161,7 +161,7 @@ function Portfolio() {
   return (
     <div className="portfolio-container">
       <h2 className="tradeBoxHeader">
-        Portfolio Watchlist
+        Portfolio
         {isConnected}
         <span>Total ${sumTokenValue}</span>
       </h2>
