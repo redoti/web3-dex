@@ -38,6 +38,7 @@ function Portfolio() {
           // fetch Prices
           const response = await axios.get(`https://coins.llama.fi/prices/current/arbitrum:${token.contractAddress}`);
           const tokenPrice = response?.data?.coins?.[`arbitrum:${token.contractAddress}`]?.price;
+
           return {
             name: tokenName,
             balance: roundedBalance,
@@ -60,6 +61,20 @@ function Portfolio() {
     fetchTokenData();
   }, []);
   
+  const sumValue = () => {
+    let totalValue = 0;
+  
+    balances.forEach((token) => {
+      const tokenPrice = token.price;
+      const value = tokenPrice ? tokenPrice * token.balance : 0;
+      totalValue += value;
+    });
+  
+    return totalValue.toFixed(3);
+  };
+
+  const sumTokenValue = sumValue();
+
   const columns = [
     {
       title: "Icon",
@@ -148,10 +163,12 @@ function Portfolio() {
       <h2 className="tradeBoxHeader">
         Portfolio Watchlist
         {isConnected}
+        <span>Total ${sumTokenValue}</span>
       </h2>
       {!isConnected && <p>Please connect your wallet</p>}
       {isConnected && mainTable()}
     </div>
+    
   );
 }
 
