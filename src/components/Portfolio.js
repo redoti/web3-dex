@@ -20,11 +20,11 @@ function Portfolio() {
       const connectedAddress = address;
       const balances = await alchemy.core.getTokenBalances(connectedAddress);
       const nonZeroBalances = balances.tokenBalances.filter((token) => {
-        return token.tokenBalance !== "0";
+        return token.tokenBalance > "0.00001";
       });
   
       const tokenData = await Promise.all(
-        nonZeroBalances.map(async (token, index) => {
+        nonZeroBalances.map(async (token) => {
           let balance = token.tokenBalance;
           
           // fetch Metadatas
@@ -38,7 +38,6 @@ function Portfolio() {
           // fetch Prices
           const response = await axios.get(`https://coins.llama.fi/prices/current/arbitrum:${token.contractAddress}`);
           const tokenPrice = response?.data?.coins?.[`arbitrum:${token.contractAddress}`]?.price;
-  
           return {
             name: tokenName,
             balance: roundedBalance,
@@ -74,6 +73,8 @@ function Portfolio() {
       key: "name",
       align: "center",
       render: (_, token) => <span>{token.name}</span>,
+      sorter: (a, b) => a.name.localeCompare(b.name),
+      sortDirections: ["ascend", "descend"],
     },
     {
       title: "Price",
@@ -85,6 +86,12 @@ function Portfolio() {
         const tokenPrice = token.price;
         return tokenPrice ? `$${tokenPrice}` : 0;
       },
+      sorter: (a, b) => {
+        const aPrice = a.price ? a.price : 0;
+        const bPrice = b.price ? b.price : 0;
+        return aPrice - bPrice;
+      },
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Balance",
@@ -93,6 +100,8 @@ function Portfolio() {
       width: "100px",
       align: "center",
       render: (balance) => <span>{balance}</span>,
+      sorter: (a, b) => a.balance - b.balance,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Value",
@@ -100,10 +109,16 @@ function Portfolio() {
       width: "100px",
       align: "center",
       render: (_, token) => {
-          const tokenPrice = token.price;
-          const value = tokenPrice ? (tokenPrice * token.balance).toFixed(3) : null;
-          return value ? <span>${value}</span> : 0;
-      }
+        const tokenPrice = token.price;
+        const value = tokenPrice ? (tokenPrice * token.balance).toFixed(3) : null;
+        return value ? <span>${value}</span> : 0;
+      },
+      sorter: (a, b) => {
+        const aValue = a.price ? a.price * a.balance : 0;
+        const bValue = b.price ? b.price * b.balance : 0;
+        return aValue - bValue;
+      },
+      sortDirections: ["descend", "ascend"],
     },
   ];
 
