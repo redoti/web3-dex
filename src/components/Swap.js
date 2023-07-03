@@ -15,7 +15,7 @@ function Swap(props) {
 
   // useState hooks to manage component state
   const [messageApi, contextHolder] = message.useMessage();
-  const [slippage, setSlippage] = useState(2.5);
+  const [slippage, setSlippage] = useState(0.5);
   const [tokenOneAmount, setTokenOneAmount] = useState(null);
   const [tokenTwoAmount, setTokenTwoAmount] = useState(null);
   const [tokenOne, setTokenOne] = useState(tokenList[0]);
