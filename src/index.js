@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -8,7 +8,7 @@ import { arbitrum } from 'wagmi/chains'
 import { publicProvider } from "wagmi/providers/public";
 
 const { provider, webSocketProvider } = configureChains(
-  [arbitrum], // Use Arbitrum chain configuration instead of Ethereum mainnet
+  [arbitrum],
   [publicProvider()]
 );
 
@@ -18,13 +18,12 @@ const client = createClient({
   webSocketProvider,
 });
 
-ReactDOM.render(
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <WagmiConfig client={client}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </WagmiConfig>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
