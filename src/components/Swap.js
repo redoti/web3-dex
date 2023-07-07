@@ -10,6 +10,7 @@ import tokenList from "../tokenList.json";
 import axios from "axios";
 import { useSendTransaction, useWaitForTransaction } from "wagmi";
 
+
 function Swap(props) {
   const { address, isConnected } = props;
 
@@ -127,6 +128,25 @@ function Swap(props) {
     }
   }
   
+  // check  allowance
+  async function getAllowance() {
+    const url = `https://api.1inch.io/v5.0/42161/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`;
+  
+    try {
+      const response = await axios.get(url);
+      const data = response.data;
+      const decimals = tokenOne.decimals;
+      const decimalFactor = 10 ** decimals;
+      const numAllow = parseInt(data.allowance);
+      const formattedAmount = Math.floor(numAllow / decimalFactor);
+  
+      console.log(`Your $${tokenOne.ticker} allowance is :`, formattedAmount);
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }  
+  
   // Approve Allowance
   
   async function approveAllowance() {
@@ -135,7 +155,7 @@ function Swap(props) {
         `https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`
       );
       setTxDetails(approve.data);
-      console.log("Your token allowance is: " + approve.data.value);
+      await getAllowance();
     } catch (error) {
       console.error("Failed to approve token allowance:", error);
     }
@@ -150,12 +170,13 @@ function Swap(props) {
         const tx = await axios.get(
           `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${formattedAmount}&fromAddress=${address}&slippage=${slippage}`
         );
+      
   
       let decimals = Number(`1E${tokenTwo.decimals}`);
       setTokenTwoAmount((Number(tx.data.toTokenAmount) / decimals).toFixed(2));
       setTxDetails(tx.data.tx);
     } catch (error) {
-      console.log("You have to approve token allowance")
+      console.log(`You need to increase the spending limit`);
       await approveAllowance();
     }
   }
