@@ -47,7 +47,7 @@
       "ticker": "CELR",
       "name": "CelerToken",
       "decimals": 18,
-      "img": "https://zapper.fi/images/CELR-icon.png",
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/3814.png",
       "address": "0x3a8b787f78d775aecfeea15706d4221b40f345ab"
   },
  {
@@ -128,12 +128,6 @@
       "img": "https://tokens.1inch.io/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2.png"
   },
  {
-      "ticker": "PL2",
-      "name": "Plenny",
-      "decimals": 18,
-      "address": "0x3642c0680329ae3e103e2b5ab29ddfed4d43cbe5"
-  },
- {
       "ticker": "PREMIA",
       "name": "Premia",
       "decimals": 18,
@@ -151,7 +145,8 @@
       "ticker": "SWPR",
       "name": "Swapr",
       "decimals": 18,
-      "address": "0xde903e2712288a1da82942dddf2c20529565ac30"
+      "address": "0xde903e2712288a1da82942dddf2c20529565ac30",
+      "img" : "https://s2.coinmarketcap.com/static/img/coins/64x64/12368.png"
   },
 {
       "ticker": "UNI",
@@ -223,7 +218,7 @@
       "name": "Wrapped sOHM",
       "decimals": 18,
       "address": "0x739ca6d71365a08f584c8fc4e1029045fa8abc4b",
-      "img": "https://tokens.1inch.io/0x739ca6d71365a08f584c8fc4e1029045fa8abc4b.png"
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/12904.png"
   },
  {
       "ticker": "deUSDC",
@@ -417,7 +412,7 @@
       "name": "Metavault DAO",
       "decimals": 9,
       "address": "0x15a808ed3846d25e88ae868de79f1bcb1ac382b5",
-      "img": "https://tokens.1inch.io/0x15a808ed3846d25e88ae868de79f1bcb1ac382b5.png"
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/18702.png"
   },
  {
       "ticker": "UND",
@@ -460,7 +455,7 @@
       "name": "beefy.finance",
       "decimals": 18,
       "address": "0x99c409e5f62e4bd2ac142f17cafb6810b8f0baae",
-      "img": "https://tokens.1inch.io/0x99c409e5f62e4bd2ac142f17cafb6810b8f0baae.png"
+      "img": "https://s2.coinmarketcap.com/static/img/coins/64x64/7311.png"
   },
  {
       "ticker": "LYRA",
