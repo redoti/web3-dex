@@ -2,74 +2,111 @@ import React, { useState, useEffect } from "react";
 import { Table, Avatar } from "antd";
 import axios from "axios";
 import { useAccount } from "wagmi";
-import "../Portfolio.css";
 import { Alchemy } from "alchemy-sdk";
-import config from "../config"
+import { debounce } from "lodash";
+import config from "../config";
+import "../Portfolio.css";
 
-function Portfolio() {
+
+const Portfolio = () => {
   const { isConnected, address } = useAccount();
   const [balances, setBalances] = useState([]);
+  const [sumTokenValue, setSumTokenValue] = useState(0);
   const alchemy = new Alchemy(config);
 
   const fetchTokenData = async () => {
     try {
-      const connectedAddress = address;
-      const balances = await alchemy.core.getTokenBalances(connectedAddress);
+      // Get token balances
+      const balances = await alchemy.core.getTokenBalances(address);
+
+      // Remove tokens with zero balance
       const nonZeroBalances = balances.tokenBalances.filter((token) => {
-        return token.tokenBalance > "0.00001";
+        return token.tokenBalance > 0.0001;
       });
-  
-      const tokenData = await Promise.all(
-        nonZeroBalances.map(async (token) => {
+
+      const results = [];
+
+      // Create an array of promises for fetching token data
+      const promises = nonZeroBalances.map(async (token) => {
+        try {
+          // Get balance of token
           let balance = token.tokenBalance;
-          
-          // fetch Metadatas
+
+          // Get metadata of token
           const metadata = await alchemy.core.getTokenMetadata(token.contractAddress);
-          const tokenName = metadata.name + " (" + metadata.symbol + ")";
 
-          // calculate balance from hex to decimal
-          const tokenBalance = balance / Math.pow(10, metadata.decimals);
-          const roundedBalance = tokenBalance.toFixed(3);
-          
-          // fetch Prices
-          const response = await axios.get(`https://coins.llama.fi/prices/current/arbitrum:${token.contractAddress}`);
-          const tokenPrice = response?.data?.coins?.[`arbitrum:${token.contractAddress}`]?.price;
+          // Compute token balance to decimal
+          balance = balance / Math.pow(10, metadata.decimals);
+          balance = balance.toFixed(5);
 
+          // Get token price
+          const response = await axios.get(
+            `https://coins.llama.fi/prices/current/arbitrum:${token.contractAddress}`
+          );
+          const tokenPrice =
+            response?.data?.coins?.[`arbitrum:${token.contractAddress}`]?.price;
+
+          // Return token details
           return {
-            name: tokenName,
-            balance: roundedBalance,
+            name: metadata.name,
+            balance: balance,
             decimals: metadata.decimals,
             address: token.contractAddress,
             img: metadata.logo,
             ticker: metadata.symbol,
             price: tokenPrice,
           };
-        })
-      );
-  
-      setBalances(tokenData);
+        } catch (error) {
+          console.error(
+            `Error retrieving data for token at address ${token.contractAddress}:`,
+            error
+          );
+          // Return null for failed promises
+          return null;
+        }
+      });
+      // Execute all promises in parallel and wait for their completion
+      const settledPromises = await Promise.allSettled(promises);
+
+      // Store valid token details in results array
+      for (let promiseResult of settledPromises) {
+        if (promiseResult.status === "fulfilled") {
+          const data = promiseResult.value;
+          results.push(data);
+        }
+      }
+
+      return results;
     } catch (error) {
-      console.error("Error fetching token data:", error);
+      console.error("Error retrieving token balances:", error);
+      throw error;
     }
   };
-  
+
+  const fetchData = debounce(async () => {
+    try {
+      const output = await fetchTokenData();
+      setBalances(output);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  }, 500); // Adjust the debounce delay (in milliseconds) as per your requirements
+
   useEffect(() => {
-    fetchTokenData();
+      fetchData();
   }, []);
-  
-  const sumValue = () => {
+
+  useEffect(() => {
     let totalValue = 0;
-  
+
     balances.forEach((token) => {
       const tokenPrice = token.price;
       const value = tokenPrice ? tokenPrice * token.balance : 0;
       totalValue += value;
     });
-  
-    return totalValue.toFixed(3);
-  };
 
-  const sumTokenValue = sumValue();
+    setSumTokenValue(totalValue.toFixed(4));
+  }, [balances]);
 
   const columns = [
     {
@@ -134,14 +171,13 @@ function Portfolio() {
   ];
 
   const mainTable = () => {
-    // Filter out balances with value less than 0.001 &
     const filteredBalances = balances.filter((token) => {
       const tokenPrice = token.price;
-      const tokenImg = token.img
+      const tokenImg = token.img;
       const value = tokenPrice ? tokenPrice * token.balance : null;
       return value && value >= 0.001 && tokenImg !== null;
     });
-  
+
     return (
       <>
         <Table
@@ -164,8 +200,7 @@ function Portfolio() {
       {!isConnected && <p>Please connect your wallet</p>}
       {isConnected && mainTable()}
     </div>
-    
   );
-}
+};
 
 export default Portfolio;

@@ -2,7 +2,6 @@ import React from "react";
 import Logo from "../mixel-logo.png";
 import Arb from "../arbitrum-logo.png";
 import { Link } from "react-router-dom";
-import { Box } from "@chakra-ui/react"
 
 function Header(props) {
 
