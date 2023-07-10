@@ -3,16 +3,12 @@ import { Table, Avatar } from "antd";
 import axios from "axios";
 import { useAccount } from "wagmi";
 import "../Portfolio.css";
-import { Alchemy, Network } from "alchemy-sdk";
-
+import { Alchemy } from "alchemy-sdk";
+import config from "../config"
 
 function Portfolio() {
   const { isConnected, address } = useAccount();
   const [balances, setBalances] = useState([]);
-  const config = {
-    apiKey: "PuCUG-mzhjx1W_n6WB0VRDNd_Rr0-TfC",
-    network: Network.ARB_MAINNET,
-  };
   const alchemy = new Alchemy(config);
 
   const fetchTokenData = async () => {

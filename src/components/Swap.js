@@ -9,7 +9,8 @@ import {
 import tokenList from "../tokenList.json";
 import axios from "axios";
 import { useSendTransaction, useWaitForTransaction } from "wagmi";
-
+import { Alchemy } from "alchemy-sdk";
+import config from "../config"
 
 function Swap(props) {
   const { address, isConnected } = props;
@@ -29,12 +30,7 @@ function Swap(props) {
     data: null,
     value: null,
   });
-  const { Alchemy, Network } = require("alchemy-sdk");
   
-  const config = {
-    apiKey: "PuCUG-mzhjx1W_n6WB0VRDNd_Rr0-TfC",
-    network: Network.ARB_MAINNET,
-  };
   const alchemy = new Alchemy(config);
 
 
