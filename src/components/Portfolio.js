@@ -118,9 +118,9 @@ const Portfolio = () => {
     {
       title: "Token Name",
       dataIndex: "name",
-      key: "name",
+      key: "[name,ticker]",
       align: "center",
-      render: (_, token) => <span>{token.name}</span>,
+      render: (_, token) => <span>{token.name} ({token.ticker})</span>,
       sorter: (a, b) => a.name.localeCompare(b.name),
       sortDirections: ["ascend", "descend"],
     },
