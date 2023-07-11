@@ -194,8 +194,7 @@ const Portfolio = () => {
     <div className="portfolio-container">
       <h2 className="tradeBoxHeader">
         Portfolio
-        {isConnected}
-        <span>Total ${sumTokenValue}</span>
+        {isConnected && <span>Total ${sumTokenValue}</span>}
       </h2>
       {!isConnected && <p>Please connect your wallet</p>}
       {isConnected && mainTable()}
