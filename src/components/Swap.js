@@ -174,13 +174,23 @@ function Swap(props) {
   // Do Swap
   async function Swap() {
     try {
-        const decimalFactor = 10 ** tokenOne.decimals;
-        const formattedAmount = Math.floor(tokenOneAmount * decimalFactor);
-
-        const tx = await axios.get(
-          `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${formattedAmount}&fromAddress=${address}&slippage=${slippage}`
-        );
-      
+      let tokenOneAddress = tokenOne.address;
+      let tokenTwoAddress = tokenTwo.address;
+  
+      if (tokenOneAddress === "0x0000000000000000000000000000000000000000") {
+        tokenOneAddress = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+      }
+  
+      if (tokenTwoAddress === "0x0000000000000000000000000000000000000000") {
+        tokenTwoAddress = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+      }
+  
+      const decimalFactor = 10 ** tokenOne.decimals;
+      const formattedAmount = Math.floor(tokenOneAmount * decimalFactor);
+  
+      const tx = await axios.get(
+        `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOneAddress}&toTokenAddress=${tokenTwoAddress}&amount=${formattedAmount}&fromAddress=${address}&slippage=${slippage}`
+      );
   
       let decimals = Number(`1E${tokenTwo.decimals}`);
       setTokenTwoAmount((Number(tx.data.toTokenAmount) / decimals).toFixed(2));
@@ -190,6 +200,7 @@ function Swap(props) {
       await approveAllowance();
     }
   }
+  
   
   // Fetch token prices on component mount
   useEffect(()=>{
