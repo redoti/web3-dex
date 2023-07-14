@@ -93,7 +93,9 @@ const Portfolio = () => {
   }, 500); // Adjust the debounce delay (in milliseconds) as per your requirements
 
   useEffect(() => {
+    if (isConnected) {
       fetchData();
+    }
   }, []);
 
   useEffect(() => {
