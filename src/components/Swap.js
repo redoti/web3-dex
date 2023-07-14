@@ -126,7 +126,13 @@ function Swap(props) {
   
   // check  allowance
   async function getAllowance() {
-    const url = `https://api.1inch.io/v5.0/42161/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`;
+    let tokenAddress = tokenOne.address;
+  
+    if (tokenAddress === "0x0000000000000000000000000000000000000000") {
+      tokenAddress = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+    }
+  
+    const url = `https://api.1inch.io/v5.0/42161/approve/allowance?tokenAddress=${tokenAddress}&walletAddress=${address}`;
   
     try {
       const response = await axios.get(url);
@@ -136,26 +142,34 @@ function Swap(props) {
       const numAllow = parseInt(data.allowance);
       const formattedAmount = Math.floor(numAllow / decimalFactor);
   
-      console.log(`Your $${tokenOne.ticker} allowance is :`, formattedAmount);
+      console.log(`Your $${tokenOne.ticker} allowance is:`, formattedAmount);
     } catch (error) {
       console.error('Error:', error);
       throw error;
     }
-  }  
+  }
+  
   
   // Approve Allowance
   
   async function approveAllowance() {
     try {
+      let tokenAddress = tokenOne.address;
+      
+      if (tokenAddress === "0x0000000000000000000000000000000000000000") {
+        tokenAddress = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+      }
+      
       const approve = await axios.get(
-        `https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`
+        `https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenAddress}`
       );
       setTxDetails(approve.data);
       await getAllowance();
     } catch (error) {
       console.error("Failed to approve token allowance:", error);
     }
-  }  
+  }
+    
   
   // Do Swap
   async function Swap() {
