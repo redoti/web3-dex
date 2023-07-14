@@ -233,8 +233,9 @@ function Swap(props) {
   };
   
   useEffect(() => {
+    if (isConnected) {
     fetchTokenBalances();
-  }, [tokenOne, tokenTwo]);
+  }}, [tokenOne, tokenTwo]);
   
 
   
