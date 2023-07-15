@@ -144,7 +144,7 @@ const Collection = () => {
                   actions={[
                     <div className="icon" onClick={() => handleEtherClick(nft.metadata.nftContractAddress, nft.metadata.tokenId)}>
                       <div href={nft.metadata.nftContractAddress} target="_blank" rel="noopener noreferrer">
-                        <img className="etherscan-icon" src={etherscan} alt="Etherscan" />
+                        <img className="etherscan" src={etherscan} alt="Etherscan" />
                       </div>
                     </div>,
 
