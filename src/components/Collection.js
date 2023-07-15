@@ -184,7 +184,7 @@ const Collection = () => {
           ))}
         </Row>
       ) : (
-        <div>
+        <div className="connect-wallet-text">
           Please connect your wallet
         </div>
       )}
