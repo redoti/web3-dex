@@ -17,6 +17,9 @@ function Header(props) {
         <Link to="/Portfolio" className="link">
           <div className="headerItem">Portfolio</div>
         </Link>
+        <Link to="/Collection" className="link">
+          <div className="headerItem">Collection</div>
+        </Link>
       </div>
       <div className="rightH">
         <div className="headerItem">

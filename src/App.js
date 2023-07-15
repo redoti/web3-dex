@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Swap from "./components/Swap";
 import Portfolio from "./components/Portfolio";
+import Collection from "./components/Collection";
 import { Routes, Route } from "react-router-dom";
 import { useConnect, useAccount } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Swap isConnected={isConnected} address={address} />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/collection" element={<Collection />} />
           </Routes>
         </div>
       </div>

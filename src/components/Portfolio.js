@@ -93,7 +93,9 @@ const Portfolio = () => {
   }, 500); // Adjust the debounce delay (in milliseconds) as per your requirements
 
   useEffect(() => {
+    if (isConnected) {
       fetchData();
+    }
   }, []);
 
   useEffect(() => {
@@ -118,9 +120,9 @@ const Portfolio = () => {
     {
       title: "Token Name",
       dataIndex: "name",
-      key: "name",
+      key: "[name,ticker]",
       align: "center",
-      render: (_, token) => <span>{token.name}</span>,
+      render: (_, token) => <span>{token.name} ({token.ticker})</span>,
       sorter: (a, b) => a.name.localeCompare(b.name),
       sortDirections: ["ascend", "descend"],
     },
@@ -194,8 +196,7 @@ const Portfolio = () => {
     <div className="portfolio-container">
       <h2 className="tradeBoxHeader">
         Portfolio
-        {isConnected}
-        <span>Total ${sumTokenValue}</span>
+        {isConnected && <span>Total ${sumTokenValue}</span>}
       </h2>
       {!isConnected && <p>Please connect your wallet</p>}
       {isConnected && mainTable()}
