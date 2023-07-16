@@ -95,6 +95,7 @@ const Portfolio = () => {
     if (isConnected) {
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -148,7 +149,8 @@ const Portfolio = () => {
           });
           return `$${formattedPrice}`;
         } else {
-          return `$${tokenPrice}`; 
+          const normalPrice = tokenPrice.toFixed(2);
+          return `$${normalPrice}`; 
         }
       },
       sorter: (a, b) => {
@@ -178,7 +180,7 @@ const Portfolio = () => {
         const tokenPrice = token.price;
         const value = tokenPrice ? (tokenPrice * token.balance).toLocaleString("en-US", {
           minimumFractionDigits: 0,
-          maximumFractionDigits: 3,
+          maximumFractionDigits: 2,
         }) : null;
         return value ? <span>${value}</span> : 0;
       },

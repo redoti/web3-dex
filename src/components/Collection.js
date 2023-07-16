@@ -168,8 +168,8 @@ const Collection = () => {
           <Row gutter={[16, 16]}>
             {nftList.map((nft, index) => (
               nft.metadata.nftImage && (
-                <Col xl={4} lg={8} md={12} sm={24} key={index}>
-                  <Card lg={4} md={8} sm={12} xs={24}
+                <Col xl={4} lg={5} md={8} sm={8} key={index}>
+                  <Card
                     className="card & actions"
                     cover={ 
                       ['mp4', 'webm', 'mkv', undefined].includes(nft.metadata.nftFormat) ? (
@@ -232,7 +232,7 @@ const Collection = () => {
                       title={<span className="title">{nft.title}</span>}
                       description={
                         <span className="description">
-                          Price: {nft.metadata.nftFloorPrice || 0} ETH 
+                          Price: {nft.metadata.nftFloorPrice || "Price N/A"} ETH 
                           (${usdPrice(nft.metadata.nftFloorPrice || 0)})
                         </span>
                       }
