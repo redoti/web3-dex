@@ -1,6 +1,6 @@
 /* portfolio.css */
 .portfolio-container {
-  width: 100%;
+  width: 768px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -50,8 +50,10 @@
   color: #fff;
 }
 
-
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 425px) {
+  .portfolio-container {
+    width: 100%;
+  }
   .ant-table-content {
     overflow-x: auto;
   }
@@ -85,3 +87,39 @@
   /* Adjust other styles as needed for smaller screens */
 }
 
+@media screen and (max-width: 375px) {
+  .portfolio-container {
+    width: 100%;
+  }
+  .ant-table-content {
+    overflow-x: auto;
+  }
+
+  .mainWindow {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+  }
+  .portfolio-container {
+    max-width: 450px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+
+  .portfolio-table-container {
+    max-height: unset;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .portfolio-table .ant-table-thead > tr > th,
+  .portfolio-table .ant-table-tbody > tr > td {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: fit-content;
+  }
+
+  /* Adjust other styles as needed for smaller screens */
+}

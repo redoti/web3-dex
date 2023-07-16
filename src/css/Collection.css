@@ -48,27 +48,51 @@
 
   .cover{
     max-height: 293.33px  ; 
-    max-height : 293.33px ;
+    max-width : 293.33px ;
   }
 
+  @media screen and (max-width: 768px) {
+    .cover{
+      max-height: 218.66px  ; 
+      max-width : 218.66px ;
+    }
+
+    .ant-card-meta-avatar {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .mainWindow {
+      padding: 10px;
+    }
+    .cover{
+      max-height: 154.5px  ; 
+      max-width : 154.5px ;
+    }
+
+    .ant-card-meta-avatar {
+      display: none;
+    }
+  }
         
-        @media screen and (min-width: 375px) {
 
-          .gallery {
-            display: flex;
-            column-count: 2;
-            width: 100%;
-            align-items: center;
-          }
+  @media screen and (max-width: 375px) {
 
-          .ant-card-meta-avatar {
-            display: none;
-          }
+    .gallery {
+      display: flex;
+      width: 100%;
+      align-items: center;
+    }
 
-          .cover{
-            max-height: 149.72px  ; 
-            max-height : 149.72px ;
-          }
-        } 
+    .ant-card-meta-avatar {
+      display: none;
+    }
+
+    .cover{
+      max-height: 149.72px  ; 
+      max-width : 149.72px ;
+    }
+  } 
       
         
