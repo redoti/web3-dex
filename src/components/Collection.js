@@ -38,11 +38,11 @@ const Collection = () => {
                 const nftContractAddress = metadata?.contract?.address;
                 const nftName = metadata?.title;
                 const nftUrl = metadata?.contract?.openSea?.externalUrl;
-                const nftFormat = metadata?.media[0].format;
+                const nftFormat = metadata?.media[0]?.format;
                 const nftTwitter = metadata?.contract?.openSea?.twitterUsername;
                 const nftImageUrl = metadata?.contract?.openSea?.imageUrl
 
-                console.log(nftName + " " + tokenId);
+                console.log(nftName + " " + nftImage);
 
                 return {
                   ...nft,
@@ -131,26 +131,32 @@ const Collection = () => {
                       <video autoPlay loop
                         src={nft.metadata.nftImage}
                         alt={nft.title}
-                        style={{ maxHeight: '322.4px', maxWidth: '322.4px' }}
+                        className="cover"
                       />
                     ) : (
                       <img
-                        src={nft.metadata.nftImage || nft.metadata.nftImageUrl}
+                        src={nft.metadata.nftImage}
                         alt={nft.title}
-                        style={{ maxHeight: '322.4px', maxWidth: '322.4px' }}
+                        className="cover"
                       />
                     )
                   }
                   actions={[
                     <div className="icon" onClick={() => handleEtherClick(nft.metadata.nftContractAddress, nft.metadata.tokenId)}>
-                      <div href={nft.metadata.nftContractAddress} target="_blank" rel="noopener noreferrer">
+                      <div 
+                      href={nft.metadata.nftContractAddress} 
+                      target="_blank" 
+                      rel="noopener noreferrer">
                         <img className="etherscan" src={etherscan} alt="Etherscan" />
                       </div>
                     </div>,
 
                     nft.metadata.nftTwitter ? (
                       <div className="icon" onClick={() => handleTwitterClick(nft.metadata.nftTwitter)}>
-                        <div href={nft.metadata.nftTwitter} target="_blank" rel="noopener noreferrer">
+                        <div 
+                        href={nft.metadata.nftTwitter} 
+                        target="_blank" 
+                        rel="noopener noreferrer">
                           <TwitterOutlined />
                         </div>
                       </div>
@@ -162,7 +168,10 @@ const Collection = () => {
 
                     nft.metadata.nftUrl ? (
                       <div className="icon" onClick={() => handleInfoClick(nft.metadata.nftUrl)}>
-                        <div href={nft.metadata.nftUrl} target="_blank" rel="noopener noreferrer">
+                        <div 
+                        href={nft.metadata.nftUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer">
                           <InfoCircleFilled />
                         </div>
                       </div>
