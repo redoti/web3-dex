@@ -1,10 +1,14 @@
 /* portfolio.css */
+.portfolio-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
 .portfolio-table-container {
-  max-height: 500px; /* Adjust the maximum height as per your requirement */
-    overflow: auto;
-    border-radius: 10px;
-    
+  max-height: 500px;
+  overflow: auto;
+  border-radius: 10px;
 }
 .portfolio-table-container::-webkit-scrollbar {
   width: 0px;
@@ -20,25 +24,90 @@
 
 /* Override table header background color */
 .portfolio-table .ant-table-thead > tr > th {
-    background-color: #0E111B;
-    border: #21273a;
-    color: #fff;
-  }
-  
-  .portfolio-table .ant-table-tbody > tr:hover > td {
-    background-color: #3a4157 !important;
-    border: #243056;
-    
+  background-color: #0E111B;
+  border: #21273a;
+  color: #fff;
+}
+
+.portfolio-table .ant-table-tbody > tr:hover > td {
+  background-color: #3a4157 !important;
+  border: #243056;
+}
+
+/* Override table row selected background color */
+.portfolio-table .ant-table-tbody > tr.ant-table-row-selected > td {
+  background-color: #e6f7ff;
+}
+
+.portfolio-table .ant-table-tbody > tr > td {
+  background-color: #1f2639;
+  color: #fff;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 768px) {
+  .portfolio-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* Override table row selected background color */
-  .portfolio-table .ant-table-tbody > tr.ant-table-row-selected > td {
-    background-color: #e6f7ff;
+  .portfolio-table-container {
+    max-height: unset;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .portfolio-table .ant-table-thead > tr > th {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
   }
 
   .portfolio-table .ant-table-tbody > tr > td {
-    background-color: #1f2639;
-    color: #fff;
-    
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
-  
+
+  /* Adjust other styles as needed for smaller screens */
+}
+
+@media screen and (max-width: 425px) {
+  .portfolio-container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .portfolio-table-container {
+    max-height: unset;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .portfolio-table .ant-table-thead > tr > th,
+  .portfolio-table .ant-table-tbody > tr > td {
+    white-space: unset;
+    text-overflow: unset;
+    overflow: unset;
+  }
+
+  /* Adjust other styles as needed for smaller screens */
+}
+
+@media screen and (min-width: 1024px) {
+  .portfolio-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .portfolio-table-container {
+    max-height: 400px;
+  }
+}

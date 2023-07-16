@@ -8,7 +8,7 @@ function Header(props) {
   const {address, isConnected, connect} = props;
 
   return (
-    <header>
+    <header > 
       <div className="leftH">
         <img src={Logo} alt="logo" className="logo" />
         <Link to="/" className="link">

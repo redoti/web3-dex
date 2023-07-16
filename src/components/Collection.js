@@ -168,18 +168,18 @@ const Collection = () => {
           <Row gutter={[16, 16]}>
             {nftList.map((nft, index) => (
               nft.metadata.nftImage && (
-                <Col lg={4} md={8} sm={12} xs={24} key={index}>
-                  <Card
+                <Col xl={4} lg={8} md={12} sm={24} key={index}>
+                  <Card lg={4} md={8} sm={12} xs={24}
                     className="card & actions"
-                    cover={
+                    cover={ 
                       ['mp4', 'webm', 'mkv', undefined].includes(nft.metadata.nftFormat) ? (
-                        <video autoPlay loop
+                        <video autoPlay loop 
                           src={nft.metadata.nftImage}
                           alt={nft.title}
                           className="cover"
                         />
                       ) : (
-                        <img
+                        <img 
                           src={nft.metadata.nftImage}
                           alt={nft.title}
                           className="cover"

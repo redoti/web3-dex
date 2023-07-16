@@ -212,7 +212,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div>
+    <div className="portfolio-container"> 
       <h2 className="tradeBoxHeader">
         Portfolio
         {isConnected && <span>Total ${sumTokenValue}</span>}
