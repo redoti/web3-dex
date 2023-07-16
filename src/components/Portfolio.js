@@ -7,7 +7,6 @@ import { debounce } from "lodash";
 import config from "../config";
 import "../Portfolio.css";
 
-
 const Portfolio = () => {
   const { isConnected, address } = useAccount();
   const [balances, setBalances] = useState([]);
@@ -107,7 +106,13 @@ const Portfolio = () => {
       totalValue += value;
     });
 
-    setSumTokenValue(totalValue.toFixed(4));
+    // Format totalValue with comma separators
+    const formattedValue = totalValue.toLocaleString("en-US", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 3,
+    });
+
+    setSumTokenValue(formattedValue);
   }, [balances]);
 
   const columns = [
@@ -134,22 +139,33 @@ const Portfolio = () => {
       align: "center",
       render: (_, token) => {
         const tokenPrice = token.price;
-        return tokenPrice ? `$${tokenPrice}` : 0;
+        const threshold = 0.001;
+    
+        if (tokenPrice && tokenPrice >= threshold) {
+          const formattedPrice = parseFloat(tokenPrice).toLocaleString("en-US", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 3,
+          });
+          return `$${formattedPrice}`;
+        } else {
+          return `$${tokenPrice}`; 
+        }
       },
       sorter: (a, b) => {
-        const aPrice = a.price ? a.price : 0;
-        const bPrice = b.price ? b.price : 0;
+        const aPrice = a.price ? parseFloat(a.price) : 0;
+        const bPrice = b.price ? parseFloat(b.price) : 0;
         return aPrice - bPrice;
       },
       sortDirections: ["descend", "ascend"],
     },
+       
     {
       title: "Balance",
       dataIndex: "balance",
       key: "balance",
       width: "100px",
       align: "center",
-      render: (balance) => <span>{balance}</span>,
+      render: (balance) => <span>{parseFloat(balance).toLocaleString()}</span>,
       sorter: (a, b) => a.balance - b.balance,
       sortDirections: ["descend", "ascend"],
     },
@@ -160,7 +176,10 @@ const Portfolio = () => {
       align: "center",
       render: (_, token) => {
         const tokenPrice = token.price;
-        const value = tokenPrice ? (tokenPrice * token.balance).toFixed(3) : null;
+        const value = tokenPrice ? (tokenPrice * token.balance).toLocaleString("en-US", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 3,
+        }) : null;
         return value ? <span>${value}</span> : 0;
       },
       sorter: (a, b) => {

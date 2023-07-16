@@ -104,8 +104,12 @@ const Collection = () => {
         const priceInUSD = floorPrice * ethPrice;
         total += priceInUSD;
       });
-      setTotalValue(total.toFixed(2));
+      setTotalValue(total.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 3,
+      })); // Format total with commas
     };
+    
 
     if (isConnected) {
       calculatetotalValue();
@@ -146,8 +150,14 @@ const Collection = () => {
   };
 
   const usdPrice = (floorPrice) => {
-    return (floorPrice * ethPrice).toFixed(2);
+    const priceInUSD = floorPrice * ethPrice;
+    const formattedPrice = priceInUSD.toLocaleString("en-US", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 3,
+    });
+    return formattedPrice;
   };
+  
 
   return (
     <div className="gallery-container">
