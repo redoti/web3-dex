@@ -248,6 +248,11 @@ function Swap(props) {
           Math.pow(10, tokenOne.decimals); // Convert hexadecimal to decimal
         const roundedBalance = decimalBalance.toFixed(2); // Round to 2 decimal places
         token.roundedBalance = roundedBalance; // Add roundedBalance property to token object
+        const formattedBalance = decimalBalance.toLocaleString("en-US", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 3,
+        })
+        token.formattedBalance = formattedBalance;
       });
   
       // Update state with balances
@@ -352,7 +357,7 @@ function Swap(props) {
               if (token.contractAddress === tokenOne.address) {
                 return (
                   <div>
-                    <div>Balance: {token.roundedBalance}</div>
+                    <div>Balance: {token.formattedBalance}</div>
                     
                   </div>
                 );
