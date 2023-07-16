@@ -1,0 +1,69 @@
+.gallery-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.title{
+    color: white;;
+
+}
+
+.description{
+    color: white;
+}
+
+.card{
+    background-color: #1f2639;
+    border-color: #1f2639;
+}
+
+.actions .ant-card-actions {
+    background-color: #1f2639;
+    border-color: #1f2639;
+  }
+
+.icon{
+    color: white ;
+}
+
+.actions-menu {
+    background-color: #1f2639;
+    color: #ffffff;
+    border: 1px solid #1f2639;
+  }
+  
+  .actions-menu .ant-menu-item {
+    padding: 8px 20px;
+  }
+  
+  .actions-menu .ant-menu-item:hover {
+    background-color: #39435f;
+  }
+
+  .etherscan {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cover{
+    max-height: 293.33px  ; 
+    max-height : 293.33px ;
+  }
+
+        
+        @media screen and (min-width: 425px) {
+
+          .gallery {
+            display: flex;
+            column-count: 2;
+            width: 100%;
+            align-items: center;
+          }
+
+          .ant-card-meta-avatar {
+            display: none;
+          }
+        } 
+      
+        

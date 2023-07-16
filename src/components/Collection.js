@@ -4,7 +4,7 @@ import { Alchemy } from "alchemy-sdk";
 import { useAccount } from "wagmi";
 import { TwitterOutlined, InfoCircleFilled, CloseCircleOutlined } from '@ant-design/icons';
 import { Avatar, Card, Row, Col } from 'antd';
-import '../Collection.css';
+import '../css/Collection.css';
 import config from "../configEth";
 import debounce from 'lodash.debounce';
 import etherscan from '../etherscan.svg';
@@ -106,7 +106,7 @@ const Collection = () => {
       });
       setTotalValue(total.toLocaleString("en-US", {
         minimumFractionDigits: 0,
-        maximumFractionDigits: 3,
+        maximumFractionDigits: 2,
       })); // Format total with commas
     };
     

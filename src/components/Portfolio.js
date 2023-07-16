@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 import { Alchemy } from "alchemy-sdk";
 import { debounce } from "lodash";
 import config from "../config";
-import "../Portfolio.css";
+import "../css/Portfolio.css";
 
 const Portfolio = () => {
   const { isConnected, address } = useAccount();
@@ -110,7 +110,7 @@ const Portfolio = () => {
     // Format totalValue with comma separators
     const formattedValue = totalValue.toLocaleString("en-US", {
       minimumFractionDigits: 0,
-      maximumFractionDigits: 3,
+      maximumFractionDigits: 2,
     });
 
     setSumTokenValue(formattedValue);
