@@ -52,7 +52,7 @@
   }
 
         
-        @media screen and (min-width: 425px) {
+        @media screen and (min-width: 375px) {
 
           .gallery {
             display: flex;
@@ -63,6 +63,11 @@
 
           .ant-card-meta-avatar {
             display: none;
+          }
+
+          .cover{
+            max-height: 149.72px  ; 
+            max-height : 149.72px ;
           }
         } 
       

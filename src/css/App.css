@@ -421,7 +421,7 @@ header {
 
 /* Swap Responsiveness */
 
-@media screen and (width: 425px) {
+@media screen and (width: 375px) {
   
   
   header {
@@ -442,8 +442,16 @@ header {
   }
 
   .headerItem {
-    padding: 0px;
+    padding: 1px;
     font-size: 11px;
+  }
+
+  .leftH {
+    gap: 10px;
+  }
+
+  .rightH {
+    gap: 10px;
   }
   
   .connectButton {
