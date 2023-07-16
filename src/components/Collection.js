@@ -153,7 +153,7 @@ const Collection = () => {
     const priceInUSD = floorPrice * ethPrice;
     const formattedPrice = priceInUSD.toLocaleString("en-US", {
       minimumFractionDigits: 0,
-      maximumFractionDigits: 3,
+      maximumFractionDigits: 2,
     });
     return formattedPrice;
   };
@@ -168,7 +168,7 @@ const Collection = () => {
           <Row gutter={[16, 16]}>
             {nftList.map((nft, index) => (
               nft.metadata.nftImage && (
-                <Col lg={6} md={8} xs={24} key={index}>
+                <Col lg={4} md={8} sm={12} xs={24} key={index}>
                   <Card
                     className="card & actions"
                     cover={
@@ -232,7 +232,7 @@ const Collection = () => {
                       title={<span className="title">{nft.title}</span>}
                       description={
                         <span className="description">
-                          Floor Price: {nft.metadata.nftFloorPrice || 0} ETH 
+                          Price: {nft.metadata.nftFloorPrice || 0} ETH 
                           (${usdPrice(nft.metadata.nftFloorPrice || 0)})
                         </span>
                       }
