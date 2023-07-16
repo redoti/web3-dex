@@ -35,7 +35,7 @@ const Collection = () => {
               const metadata = await getNFTMetadata(contractAddress, tokenId);
 
               if (metadata) {
-                const nftFloorPrice = metadata?.contract?.openSea?.floorPrice;
+                const nftFloorPrice = (metadata?.contract?.openSea?.floorPrice || 0).toFixed(3);
                 const nftImage = metadata?.media[0]?.gateway;
                 const nftThumbnail = metadata?.media[0]?.thumbnail;
                 const nftSymbol = metadata?.contract?.symbol;
@@ -165,10 +165,11 @@ const Collection = () => {
       {isConnected ? (
         <>
           <h3 className="total-price">Total : ${totalValue}</h3>
+          <div className="gallery">
           <Row gutter={[16, 16]}>
             {nftList.map((nft, index) => (
               nft.metadata.nftImage && (
-                <Col xl={4} lg={5} md={8} sm={8} key={index}>
+                <Col xl={4} lg={5} md={8} sm={8} xs={12} key={index}>
                   <Card
                     className="card & actions"
                     cover={ 
@@ -242,6 +243,8 @@ const Collection = () => {
               )
             ))}
           </Row>
+          </div>
+          
         </>
       ) : (
         <div>

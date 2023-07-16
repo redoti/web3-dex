@@ -24,7 +24,7 @@ function Header(props) {
       <div className="rightH">
         <div className="headerItem">
           <img src={Arb} alt="arb" className="arb" />
-          Arbitrum
+          <span className="arbText">Arbitrum</span>
         </div>
         <div className="connectButton" onClick={connect}>
           {isConnected ? (address.slice(0,4) +"..." +address.slice(38)) : "Connect"}
