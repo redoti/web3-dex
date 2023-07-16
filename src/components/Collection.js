@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Alchemy } from "alchemy-sdk";
 import { useAccount } from "wagmi";
@@ -7,6 +8,7 @@ import '../Collection.css';
 import config from "../configEth";
 import debounce from 'lodash.debounce';
 import etherscan from '../etherscan.svg';
+import axios from 'axios';
 
 const { Meta } = Card;
 
@@ -15,6 +17,8 @@ const Collection = () => {
   const { isConnected, address } = useAccount();
 
   const [nftList, setNftList] = useState([]);
+  const [ethPrice, setEthPrice] = useState(0);
+  const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
     if (isConnected) {
@@ -24,11 +28,11 @@ const Collection = () => {
           const ownedNfts = nfts.ownedNfts;
 
           const promises = ownedNfts.map(async (nft) => {
-            const ContractAddress = nft.contract.address;
+            const contractAddress = nft.contract.address;
             const tokenId = nft.tokenId;
 
-            if (ContractAddress && tokenId) {
-              const metadata = await getNFTMetadata(ContractAddress, tokenId);
+            if (contractAddress && tokenId) {
+              const metadata = await getNFTMetadata(contractAddress, tokenId);
 
               if (metadata) {
                 const nftFloorPrice = metadata?.contract?.openSea?.floorPrice;
@@ -40,9 +44,7 @@ const Collection = () => {
                 const nftUrl = metadata?.contract?.openSea?.externalUrl;
                 const nftFormat = metadata?.media[0]?.format;
                 const nftTwitter = metadata?.contract?.openSea?.twitterUsername;
-                const nftImageUrl = metadata?.contract?.openSea?.imageUrl
-
-                console.log(nftName + " " + nftImage);
+                const nftImageUrl = metadata?.contract?.openSea?.imageUrl;
 
                 return {
                   ...nft,
@@ -72,21 +74,48 @@ const Collection = () => {
         }
       };
 
-      // Apply debounce to the fetchData function with a rate limit of 500ms
+      const fetchEthPrice = async () => {
+        try {
+          const response = await axios.get(
+            `https://coins.llama.fi/prices/current/arbitrum:0x0000000000000000000000000000000000000000`
+          );
+          const ethPrice = response?.data?.coins?.[`arbitrum:0x0000000000000000000000000000000000000000`]?.price;
+          setEthPrice(parseFloat(ethPrice || 0));
+        } catch (error) {
+          console.error("Error retrieving token price:", error);
+        }
+      };
+
       const debouncedFetchData = debounce(fetchData, 500);
       debouncedFetchData();
+      fetchEthPrice();
 
       return () => {
-        // Cleanup function to cancel any pending debounced function calls
         debouncedFetchData.cancel();
       };
     }
-  }, []);
+  }, [isConnected]);
 
-  const getNFTMetadata = async (ContractAddress, tokenId) => {
+  useEffect(() => {
+    const calculatetotalValue = () => {
+      let total = 0;
+      nftList.forEach((nft) => {
+        const floorPrice = nft.metadata.nftFloorPrice || 0;
+        const priceInUSD = floorPrice * ethPrice;
+        total += priceInUSD;
+      });
+      setTotalValue(total.toFixed(2));
+    };
+
+    if (isConnected) {
+      calculatetotalValue();
+    }
+  }, [nftList, ethPrice, isConnected]);
+
+  const getNFTMetadata = async (contractAddress, tokenId) => {
     try {
       const response = await alchemy.nft.getNftMetadata(
-        ContractAddress,
+        contractAddress,
         tokenId
       );
       return response;
@@ -116,84 +145,96 @@ const Collection = () => {
     }
   };
 
+  const usdPrice = (floorPrice) => {
+    return (floorPrice * ethPrice).toFixed(2);
+  };
+
   return (
     <div className="gallery-container">
       <h2>Collection</h2>
       {isConnected ? (
-        <Row gutter={[16, 16]}>
-          {nftList.map((nft, index) => (
-            nft.metadata.nftImage && (
-              <Col lg={6} md={8} xs={24} key={index}>
-                <Card
-                  className="card & actions"
-                  cover={
-                    ['mp4', 'webm', 'mkv', undefined].includes(nft.metadata.nftFormat) ? (
-                      <video autoPlay loop
-                        src={nft.metadata.nftImage}
-                        alt={nft.title}
-                        className="cover"
-                      />
-                    ) : (
-                      <img
-                        src={nft.metadata.nftImage}
-                        alt={nft.title}
-                        className="cover"
-                      />
-                    )
-                  }
-                  actions={[
-                    <div className="icon" onClick={() => handleEtherClick(nft.metadata.nftContractAddress, nft.metadata.tokenId)}>
-                      <div 
-                      href={nft.metadata.nftContractAddress} 
-                      target="_blank" 
-                      rel="noopener noreferrer">
-                        <img className="etherscan" src={etherscan} alt="Etherscan" />
-                      </div>
-                    </div>,
-
-                    nft.metadata.nftTwitter ? (
-                      <div className="icon" onClick={() => handleTwitterClick(nft.metadata.nftTwitter)}>
+        <>
+          <h3 className="total-price">Total : ${totalValue}</h3>
+          <Row gutter={[16, 16]}>
+            {nftList.map((nft, index) => (
+              nft.metadata.nftImage && (
+                <Col lg={6} md={8} xs={24} key={index}>
+                  <Card
+                    className="card & actions"
+                    cover={
+                      ['mp4', 'webm', 'mkv', undefined].includes(nft.metadata.nftFormat) ? (
+                        <video autoPlay loop
+                          src={nft.metadata.nftImage}
+                          alt={nft.title}
+                          className="cover"
+                        />
+                      ) : (
+                        <img
+                          src={nft.metadata.nftImage}
+                          alt={nft.title}
+                          className="cover"
+                        />
+                      )
+                    }
+                    actions={[
+                      <div className="icon" onClick={() => handleEtherClick(nft.metadata.nftContractAddress, nft.metadata.tokenId)}>
                         <div 
-                        href={nft.metadata.nftTwitter} 
+                        href={nft.metadata.nftContractAddress} 
                         target="_blank" 
                         rel="noopener noreferrer">
-                          <TwitterOutlined />
+                          <img className="etherscan" src={etherscan} alt="Etherscan" />
                         </div>
-                      </div>
-                    ) : (
-                      <div className="icon">
-                        <CloseCircleOutlined />
-                      </div>
-                    ),
+                      </div>,
 
-                    nft.metadata.nftUrl ? (
-                      <div className="icon" onClick={() => handleInfoClick(nft.metadata.nftUrl)}>
-                        <div 
-                        href={nft.metadata.nftUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                          <InfoCircleFilled />
+                      nft.metadata.nftTwitter ? (
+                        <div className="icon" onClick={() => handleTwitterClick(nft.metadata.nftTwitter)}>
+                          <div 
+                          href={nft.metadata.nftTwitter} 
+                          target="_blank" 
+                          rel="noopener noreferrer">
+                            <TwitterOutlined />
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="icon">
-                        <CloseCircleOutlined />
-                      </div>
-                    )
-                  ]}
-                >
-                  <Meta
-                    avatar={<Avatar src={nft.metadata.nftThumbnail || nft.metadata.nftImageUrl} />}
-                    title={<span className="title">{nft.title}</span>}
-                    description={<span className="description">Floor Price: {nft.metadata.nftFloorPrice || 0} ETH</span>}
-                  />
-                </Card>
-              </Col>
-            )
-          ))}
-        </Row>
+                      ) : (
+                        <div className="icon">
+                          <CloseCircleOutlined />
+                        </div>
+                      ),
+
+                      nft.metadata.nftUrl ? (
+                        <div className="icon" onClick={() => handleInfoClick(nft.metadata.nftUrl)}>
+                          <div 
+                          href={nft.metadata.nftUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer">
+                            <InfoCircleFilled />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="icon">
+                          <CloseCircleOutlined />
+                        </div>
+                      )
+                    ]}
+                  >
+                    <Meta
+                      avatar={<Avatar src={nft.metadata.nftThumbnail || nft.metadata.nftImageUrl} />}
+                      title={<span className="title">{nft.title}</span>}
+                      description={
+                        <span className="description">
+                          Floor Price: {nft.metadata.nftFloorPrice || 0} ETH 
+                          (${usdPrice(nft.metadata.nftFloorPrice || 0)})
+                        </span>
+                      }
+                    />
+                  </Card>
+                </Col>
+              )
+            ))}
+          </Row>
+        </>
       ) : (
-        <div className="connect-wallet-text">
+        <div>
           Please connect your wallet
         </div>
       )}

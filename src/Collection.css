@@ -49,4 +49,11 @@
     max-height: 322.4px; 
     max-height : 322.4px
   }
+
+  .collection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+  }
   
