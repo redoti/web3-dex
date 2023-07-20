@@ -47,14 +47,14 @@
   }
 
   .cover{
-    max-height: 293.33px  ; 
-    max-width : 293.33px ;
+    height: 293.33px  ; 
+    width : 293.33px ;
   }
 
   @media screen and (max-width: 768px) {
     .cover{
-      max-height: 218.66px  ; 
-      max-width : 218.66px ;
+      height: 218.66px  ; 
+      width : 218.66px ;
     }
 
     .ant-card-meta-avatar {
@@ -67,8 +67,8 @@
       padding: 10px;
     }
     .cover{
-      max-height: 154.5px  ; 
-      max-width : 154.5px ;
+      height: 154.5px  ; 
+      width : 154.5px ;
     }
 
     .ant-card-meta-avatar {
@@ -90,8 +90,8 @@
     }
 
     .cover{
-      max-height: 149.72px  ; 
-      max-width : 149.72px ;
+      height: 149.72px  ; 
+      width : 149.72px ;
     }
   } 
       

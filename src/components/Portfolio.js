@@ -215,12 +215,22 @@ const Portfolio = () => {
 
   return (
     <div className="portfolio-container"> 
-      <h2 className="tradeBoxHeader">
+    {isConnected ? (
+      <div>
+        <h2 className="tradeBoxHeader">
         Portfolio
-        {isConnected && <span>Total ${sumTokenValue}</span>}
-      </h2>
-      {!isConnected && <p>Please connect your wallet</p>}
-      {isConnected && mainTable()}
+          <span>Total ${sumTokenValue}</span>
+        </h2>
+        <div>
+          {mainTable()}
+        </div>
+      </div>      
+    ) : (
+      <div>
+        <h2>Portfolio</h2>
+        <span>Please connect your wallet</span>
+      </div>   
+    )}
     </div>
   );
 };
